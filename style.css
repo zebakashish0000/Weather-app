@@ -1,0 +1,54 @@
+ *{
+    margin: 0px;
+    padding: 0px;
+    font-family: cursive;
+    box-sizing: border-box;
+ }
+ 
+ body{
+    height: 100vh;
+    width: 100%;
+    background-image: url('nature.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+ }
+ .box{
+height: 500px;
+width: 400px;
+background-color: rgba(0 , 0 , 0 , 0.5);
+box-shadow: 5px 5px 10px white;
+padding: 10px;
+ }
+ .pic{
+    mix-blend-mode: multiply;
+     
+ 
+ }
+ #search{
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: powderblue;
+ }
+ #temp{
+    font-size: 70px;
+    text-align: center;
+    color: white;
+}
+ 
+.data{
+     font-size: 20px;
+     text-align: center;
+     color: rgb(248, 248, 163); 
+}
+
+
+ 

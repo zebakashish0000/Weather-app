@@ -1,0 +1,72 @@
+import React, { useState } from 'react'
+import weather from '../assets/weather.jpeg'
+import Loader from '../assets/Loader.gif'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+const AddCategory = () => {
+const[category, setCategory]= useState('');
+const[selectedFile, setSelectedFile]=useState(null);
+const[imageUrl,setImageUrl]=useState(weather);
+const[isLoading,setLoading]=useState( false);
+const[hasError, setHasError]= useState(false);
+const[error, setError]= useState('');
+
+
+let navigate= useNavigate();
+
+const fileHandler=(e)=>{
+  setSelectedFile(e.target.files[0]);
+  setImageUrl(URL.createObjectURL(e.target.files[0]));
+};
+
+  const submitHandler=(event) => {
+    event.preventDefault();
+    setLoading(true);
+
+    const  formData=new FormData();
+    FormData.append('name',category);
+    FormData.append('name',selectedFile);
+
+    axios.post(' localhost:3000/user/signup',formData) 
+      .then(res=>{
+        console.log(res);
+        setLoading(false);
+        navigate('/category')
+      })
+      .catch(err=>{
+        console.log(err.message);
+        setLoading(false);
+       setHasError(true);
+        setError(err.message);
+      });
+    
+
+  };
+  return (
+    <>
+    {isLoading && <div>
+      <img style={{width:'160px'}}src={Loader}/>
+    </div>}
+
+
+    {!isLoading && <div> 
+<h1>Add new category</h1>
+<form onSubmit={submitHandler}>
+  <input onChange={(e)=> {setCategory(e.target.value)}} type="text"/>
+  <input onChange={(e)=>  {fileHandler(e)}} type="file"/>
+  <button type="submit">submit</button>
+  <br/>
+  <img style={{width:'90px'}}src={imageUrl}/>
+  
+
+</form>
+</div>}
+
+{ hasError && <div>
+  <p style={{color:'red'}}>Erroe :-{error}</p>
+</div>}
+    </>
+  )
+}
+
+export default AddCategory
